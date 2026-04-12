@@ -49,7 +49,7 @@ elemEditorTexto.addEventListener("keyup", (e) => {
 
 elemBotaoExcluir.addEventListener("click", () => {
   excluirDocumento(idDocumento);
-  window.location.assign("../home/home.html");
+  window.location.assign("/");
 });
 
 export const atualizarTextoEditor = (texto: string) => {

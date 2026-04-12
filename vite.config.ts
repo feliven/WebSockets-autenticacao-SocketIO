@@ -10,8 +10,7 @@ export default defineConfig({
   build: {
     rolldownOptions: {
       input: {
-        main: resolve(import.meta.dirname, "index.html"),
-        home: resolve(import.meta.dirname, "src/pages/home/home.html"),
+        home: resolve(import.meta.dirname, "index.html"),
         documento: resolve(import.meta.dirname, "src/pages/documento/documento.html"),
       },
     },

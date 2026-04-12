@@ -1,4 +1,4 @@
-import type { DocNomeEId, DocumentoComId } from "../../shared/types";
+import type { DocNomeEId, DocumentoComId } from "./shared/types";
 import { criarDocumento } from "./socket-frontend-index";
 
 const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement;
@@ -22,7 +22,7 @@ export const listarLinkDocumento = (doc: DocNomeEId) => {
 
   const linkDocumento = document.createElement("a");
   linkDocumento.textContent = nomeArquivo;
-  linkDocumento.href = `../documento/documento.html?id=${idArquivo}`;
+  linkDocumento.href = `/src/pages/documento/documento.html?id=${idArquivo}`;
   linkDocumento.classList.add("list-group-item", "list-group-item-action");
   linkDocumento.id = idArquivo;
 
