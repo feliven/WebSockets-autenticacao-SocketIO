@@ -12,7 +12,7 @@ const elemEditorTexto = document.getElementById("editor-texto") as HTMLTextAreaE
 const elemBotaoExcluir = document.getElementById("excluir-documento") as HTMLButtonElement;
 
 const timeoutAindaCarregando = setTimeout(() => {
-  elemTituloDocumento.textContent = "Aguarde...";
+  elemTituloDocumento.textContent = "Carregando...";
 }, 1000);
 
 const timeoutMsgErro = setTimeout(() => {
