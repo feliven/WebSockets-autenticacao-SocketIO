@@ -3,6 +3,7 @@ import { criarDocumento } from "./socket-frontend-index";
 
 const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement;
 const elemListaVazia = document.getElementById("lista-documentos-vazia") as HTMLDivElement;
+const elemSpinner = document.getElementById("spinner") as HTMLDivElement;
 const elemTextoListaVazia = document.getElementById(
   "texto-lista-documentos-vazia",
 ) as HTMLParagraphElement;
@@ -13,6 +14,7 @@ setTimeout(() => {
 }, 0);
 
 const timeoutMsgErro = setTimeout(() => {
+  elemSpinner.hidden = true;
   elemTextoListaVazia.textContent = "Erro ao carregar documentos. Tente novamente.";
 }, 7000);
 
