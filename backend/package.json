@@ -9,7 +9,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node ./src/SocketBackend.ts",
-    "dev": "npx nodemon ./src/SocketBackend.ts"
+    "dev": "npx nodemon ./src/SocketBackend.ts",
+    "update": "pnpm install --ignore-workspace"
   },
   "dependencies": {
     "express": "^5.2.1",

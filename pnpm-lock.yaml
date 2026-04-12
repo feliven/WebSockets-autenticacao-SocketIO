@@ -22,15 +22,18 @@ importers:
         specifier: ^4.8.3
         version: 4.8.3
     devDependencies:
+      '@types/node':
+        specifier: ^25.6.0
+        version: 25.6.0
       typescript:
         specifier: ~6.0.2
         version: 6.0.2
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@latest
-        version: '@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2)'
+        version: '@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2)'
       vite-plus:
         specifier: 'catalog:'
-        version: 0.1.16(@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2))(typescript@6.0.2)
+        version: 0.1.16(@types/node@25.6.0)(@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2))(typescript@6.0.2)
 
 packages:
 
@@ -329,6 +332,9 @@ packages:
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
+
+  '@types/node@25.6.0':
+    resolution: {integrity: sha512-+qIYRKdNYJwY3vRCZMdJbPLJAtGjQBudzZzdzwQYkEPQd+PJGixUL5QfvCLDaULoLv+RhT3LDkwEfKaAkgSmNQ==}
 
   '@voidzero-dev/vite-plus-core@0.1.16':
     resolution: {integrity: sha512-fOyf14CXjcXqANFs2fCXEX+0Tn9ZjmqfFV+qTnARwIF1Kzl8WquO4XtvlDgs/fTQ91H4AyoNUgkvWdKS+C4xYA==}
@@ -678,6 +684,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@7.19.2:
+    resolution: {integrity: sha512-qYVnV5OEm2AW8cJMCpdV20CDyaN3g0AjDlOGf1OW4iaDEx8MwdtChUp4zu4H0VP3nDRF/8RKWH+IPp9uW0YGZg==}
+
   vite-plus@0.1.16:
     resolution: {integrity: sha512-sgYHc5zWLSDInaHb/abvEA7UOwh7sUWuyNt+Slphj55jPvzodT8Dqw115xyKwDARTuRFSpm1eo/t58qZ8/NylQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -862,13 +871,18 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
-  '@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2)':
+  '@types/node@25.6.0':
+    dependencies:
+      undici-types: 7.19.2
+
+  '@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2)':
     dependencies:
       '@oxc-project/runtime': 0.123.0
       '@oxc-project/types': 0.123.0
       lightningcss: 1.32.0
       postcss: 8.5.9
     optionalDependencies:
+      '@types/node': 25.6.0
       fsevents: 2.3.3
       typescript: 6.0.2
 
@@ -890,11 +904,11 @@ snapshots:
   '@voidzero-dev/vite-plus-linux-x64-musl@0.1.16':
     optional: true
 
-  '@voidzero-dev/vite-plus-test@0.1.16(@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2))(typescript@6.0.2)':
+  '@voidzero-dev/vite-plus-test@0.1.16(@types/node@25.6.0)(@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2))(typescript@6.0.2)':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@types/chai': 5.2.3
-      '@voidzero-dev/vite-plus-core': 0.1.16(typescript@6.0.2)
+      '@voidzero-dev/vite-plus-core': 0.1.16(@types/node@25.6.0)(typescript@6.0.2)
       es-module-lexer: 1.7.0
       obug: 2.1.1
       pixelmatch: 7.1.0
@@ -904,8 +918,10 @@ snapshots:
       tinybench: 2.9.0
       tinyexec: 1.1.1
       tinyglobby: 0.2.16
-      vite: '@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2)'
+      vite: '@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2)'
       ws: 8.20.0
+    optionalDependencies:
+      '@types/node': 25.6.0
     transitivePeerDependencies:
       - '@arethetypeswrong/core'
       - '@tsdown/css'
@@ -1136,11 +1152,13 @@ snapshots:
 
   typescript@6.0.2: {}
 
-  vite-plus@0.1.16(@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2))(typescript@6.0.2):
+  undici-types@7.19.2: {}
+
+  vite-plus@0.1.16(@types/node@25.6.0)(@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2))(typescript@6.0.2):
     dependencies:
       '@oxc-project/types': 0.123.0
-      '@voidzero-dev/vite-plus-core': 0.1.16(typescript@6.0.2)
-      '@voidzero-dev/vite-plus-test': 0.1.16(@voidzero-dev/vite-plus-core@0.1.16(typescript@6.0.2))(typescript@6.0.2)
+      '@voidzero-dev/vite-plus-core': 0.1.16(@types/node@25.6.0)(typescript@6.0.2)
+      '@voidzero-dev/vite-plus-test': 0.1.16(@types/node@25.6.0)(@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.6.0)(typescript@6.0.2))(typescript@6.0.2)
       oxfmt: 0.43.0
       oxlint: 1.58.0(oxlint-tsgolint@0.20.0)
       oxlint-tsgolint: 0.20.0

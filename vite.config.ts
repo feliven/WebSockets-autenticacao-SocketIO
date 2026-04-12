@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
@@ -6,4 +7,13 @@ export default defineConfig({
   },
   fmt: {},
   lint: { options: { typeAware: true, typeCheck: true } },
+  build: {
+    rolldownOptions: {
+      input: {
+        main: resolve(import.meta.dirname, "index.html"),
+        home: resolve(import.meta.dirname, "src/pages/home/home.html"),
+        documento: resolve(import.meta.dirname, "src/pages/documento/documento.html"),
+      },
+    },
+  },
 });
