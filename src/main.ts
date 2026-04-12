@@ -3,13 +3,17 @@ import { criarDocumento } from "./socket-frontend-index";
 
 const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement;
 const elemListaVazia = document.getElementById("lista-documentos-vazia") as HTMLDivElement;
+const elemTextoListaVazia = document.getElementById(
+  "texto-lista-documentos-vazia",
+) as HTMLParagraphElement;
+const elemFormNovoDocumento = document.getElementById("form-adiciona-documento") as HTMLFormElement;
 
-const timeoutAindaCarregando = setTimeout(() => {
-  elemListaVazia.textContent = "Aguarde...";
-}, 3000);
+setTimeout(() => {
+  elemTextoListaVazia.textContent = "Aguarde...";
+}, 0);
 
 const timeoutMsgErro = setTimeout(() => {
-  elemListaVazia.textContent = "Erro ao carregar documentos. Tente novamente.";
+  elemTextoListaVazia.textContent = "Erro ao carregar documentos. Tente novamente.";
 }, 7000);
 
 export const listarLinkDocumento = (doc: DocNomeEId) => {
@@ -31,8 +35,7 @@ export const listarLinkDocumento = (doc: DocNomeEId) => {
 
 export const listarTodosOsDocumentos = (docs: DocumentoComId[]) => {
   if (!docs.length) {
-    elemListaVazia.textContent = "Não foram encontrados documentos para exibir.";
-    clearTimeout(timeoutAindaCarregando);
+    elemListaDocumentos.textContent = "Não foram encontrados documentos para exibir.";
     clearTimeout(timeoutMsgErro);
     return;
   }
@@ -40,6 +43,8 @@ export const listarTodosOsDocumentos = (docs: DocumentoComId[]) => {
   docs.forEach((doc) => {
     listarLinkDocumento(doc);
   });
+
+  elemFormNovoDocumento.hidden = false;
 };
 
 export const removerLinkDocumento = (id: string) => {
@@ -48,7 +53,6 @@ export const removerLinkDocumento = (id: string) => {
 };
 
 const elemNomeNovoDocumento = document.getElementById("input-documento") as HTMLInputElement;
-const elemFormNovoDocumento = document.getElementById("form-adiciona-documento") as HTMLFormElement;
 
 elemFormNovoDocumento.addEventListener("submit", (evento) => {
   evento.preventDefault();
