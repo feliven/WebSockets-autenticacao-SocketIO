@@ -6,7 +6,7 @@ import { registrarEventosInicio } from "./registrarEventos/registrarEventosInici
 io.on("connection", (socket) => {
   registrarEventosInicio(socket, io);
   registrarEventosDocumento(socket, io);
-  registrarEventosCadastro(socket, io);
+  registrarEventosCadastro(socket);
 
   socket.on("disconnect", (motivo) => {
     console.log(`Cliente "${socket.id}" desconectado!

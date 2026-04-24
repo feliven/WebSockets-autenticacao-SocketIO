@@ -1,10 +1,18 @@
 import { ObjectId } from "mongodb";
 import { usuariosColecao } from "./dbConnect.ts";
 import type { Cadastro } from "./types.ts";
+import { criarHashGerarSalt } from "./utils/criaHashSal.ts";
 
-export const criarUsuario = (dados: Cadastro) => {
+export const criarUsuario = ({ usuario, senha }: Cadastro) => {
+  if (!usuario || !senha) {
+    console.error("Usuário e/ou senha não informados(s)");
+    return;
+  }
+
+  const { hashSenha, salSenha } = criarHashGerarSalt(senha);
+
   try {
-    const usuarioCriado = usuariosColecao.insertOne({ usuario: dados.usuario, senha: dados.senha });
+    const usuarioCriado = usuariosColecao.insertOne({ usuario, hashSenha, salSenha });
     return usuarioCriado;
   } catch (error) {
     console.error(error);
