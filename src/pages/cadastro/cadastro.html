@@ -27,11 +27,23 @@
       <form id="form-cadastro">
         <div class="mb-3">
           <label for="input-usuario" class="form-label">Usuário</label>
-          <input type="text" class="form-control" id="input-usuario" required />
+          <input
+            type="text"
+            class="form-control"
+            id="input-usuario"
+            name="input-usuario"
+            required
+          />
         </div>
         <div class="mb-3">
           <label for="input-senha" class="form-label">Senha</label>
-          <input type="password" class="form-control" id="input-senha" required />
+          <input
+            type="password"
+            class="form-control"
+            id="input-senha"
+            name="input-senha"
+            required
+          />
         </div>
         <button type="submit" class="btn btn-primary mb-3">Cadastrar</button>
         <p>Já possui cadastro? <a href="/login/index.html" class="link-primary">Faça o login</a></p>
@@ -46,5 +58,6 @@
     ></script>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="./cadastro.ts" type="module" defer></script>
   </body>
 </html>
