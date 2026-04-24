@@ -27,7 +27,7 @@
       <h1 class="display-4 mb-4 text-center" id="titulo-documento">...</h1>
     </header>
 
-    <main class="w-75 mx-auto">
+    <main class="col-10 col-lg-8 col-xl-6 mx-auto">
       <textarea
         id="editor-texto"
         class="form-control mb-4"
@@ -35,7 +35,16 @@
         disabled
       ></textarea>
 
-      <div class="barra-botoes d-flex justify-content-between">
+      <div class="col-12 col-md-8 mx-auto mb-4">
+        <h2 class="fs-5 fw-normal mb-3">Usuários conectados:</h2>
+
+        <ul class="list-group" id="usuarios-conectados">
+          <li class="list-group-item">Usuário 1</li>
+          <li class="list-group-item">Usuário 2</li>
+        </ul>
+      </div>
+
+      <div class="barra-botoes d-flex justify-content-between mb-4">
         <a href="/" class="btn btn-primary">Voltar</a>
         <button id="excluir-documento" class="btn btn-outline-danger" disabled>
           Excluir documento
