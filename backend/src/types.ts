@@ -10,6 +10,12 @@ export type Cadastro = {
   senha: string | null;
 };
 
+export type Usuario = {
+  usuario: string | null;
+  hashSenha: string | null;
+  salSenha: string | null;
+};
+
 export type DocumentoComId = WithId<Documento>;
 export type DocConteudoEId = WithId<Omit<Documento, "nome">>;
 export type DocNomeEId = WithId<Omit<Documento, "conteudo">>;

@@ -8,6 +8,12 @@ export type Cadastro = {
   senha: string | null;
 };
 
+export type Usuario = {
+  usuario: string | null;
+  hashSenha: string | null;
+  salSenha: string | null;
+};
+
 type WithId<T> = T & { _id: string };
 
 export type DocumentoComId = WithId<Documento>;
