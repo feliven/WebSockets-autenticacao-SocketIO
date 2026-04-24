@@ -19,6 +19,8 @@ export type ServerToClientEvents = {
   documento_excluido: (idDocumento: string) => void;
   adicionar_doc_homepage: (doc: DocNomeEId) => void;
   remover_doc_homepage: (idDocumento: string) => void;
+  cadastro_sucesso: () => void;
+  cadastro_erro: () => void;
 };
 
 export type ClientToServerEvents = {

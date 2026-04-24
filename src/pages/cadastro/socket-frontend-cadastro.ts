@@ -7,3 +7,11 @@ const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(enderecoAp
 export const emitirCadastroUsuario = (dados: Cadastro) => {
   socket.emit("cadastrar_usuario", dados);
 };
+
+socket.on("cadastro_sucesso", () => {
+  console.log("Cadastro realizado com sucesso");
+});
+
+socket.on("cadastro_erro", () => {
+  console.error("Erro no cadastro");
+});
