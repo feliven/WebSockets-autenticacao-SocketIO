@@ -5,6 +5,11 @@ export type Documento = {
   conteudo: string | null;
 };
 
+export type Cadastro = {
+  usuario: string | null;
+  senha: string | null;
+};
+
 export type DocumentoComId = WithId<Documento>;
 export type DocConteudoEId = WithId<Omit<Documento, "nome">>;
 export type DocNomeEId = WithId<Omit<Documento, "conteudo">>;
@@ -25,6 +30,7 @@ export type ClientToServerEvents = {
     callback: (resposta: Documento & { existe: boolean }) => void,
   ) => void;
   texto_editor: (dados: DocConteudoEId) => void;
+  cadastrar_usuario: (dados: Cadastro) => void;
 };
 
 export type InterServerEvents = {
