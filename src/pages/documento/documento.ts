@@ -7,19 +7,34 @@ import {
 const parametros = new URLSearchParams(window.location.search);
 const idDocumento = parametros.get("id") ?? "";
 
-const elemTituloDocumento = document.getElementById("titulo-documento") as HTMLHeadingElement;
-const elemEditorTexto = document.getElementById("editor-texto") as HTMLTextAreaElement;
-const elemBotaoExcluir = document.getElementById("excluir-documento") as HTMLButtonElement;
+const elemTituloDocumento = document.getElementById(
+  "titulo-documento",
+) as HTMLHeadingElement | null;
+const elemEditorTexto = document.getElementById("editor-texto") as HTMLTextAreaElement | null;
+const elemBotaoExcluir = document.getElementById("excluir-documento") as HTMLButtonElement | null;
 
 const timeoutAindaCarregando = setTimeout(() => {
-  elemTituloDocumento.textContent = "Carregando...";
+  if (elemTituloDocumento) {
+    elemTituloDocumento.textContent = "Carregando...";
+  } else {
+    console.error("elemTituloDocumento não existe");
+  }
 }, 1000);
 
 const timeoutMsgErro = setTimeout(() => {
-  elemTituloDocumento.textContent = "Erro ao carregar. Tente novamente.";
+  if (elemTituloDocumento) {
+    elemTituloDocumento.textContent = "Erro ao carregar. Tente novamente.";
+  } else {
+    console.error("elemTituloDocumento não existe");
+  }
 }, 7000);
 
 selecionarDocumento(idDocumento, (resposta) => {
+  if (!elemTituloDocumento || !elemEditorTexto || !elemBotaoExcluir) {
+    console.error("elemTituloDocumento, elemEditorTexto e/ou elemBotaoExcluir não existe(m)");
+    return;
+  }
+
   if (!resposta.existe) {
     elemTituloDocumento.textContent = "(Documento inexistente)";
     elemEditorTexto.disabled = true;
@@ -39,7 +54,7 @@ selecionarDocumento(idDocumento, (resposta) => {
   }
 });
 
-elemEditorTexto.addEventListener("keyup", (e) => {
+elemEditorTexto?.addEventListener("keyup", (e) => {
   if (elemEditorTexto.disabled) return;
 
   const textoDigitado = (e.target as HTMLTextAreaElement).value;
@@ -47,17 +62,30 @@ elemEditorTexto.addEventListener("keyup", (e) => {
   emitirTextoDigitado(doc);
 });
 
-elemBotaoExcluir.addEventListener("click", () => {
+elemBotaoExcluir?.addEventListener("click", () => {
   excluirDocumento(idDocumento);
   window.location.assign("/");
 });
 
 export const atualizarTextoEditor = (texto: string) => {
-  elemEditorTexto.value = texto;
+  if (elemEditorTexto) {
+    elemEditorTexto.value = texto;
+  } else {
+    console.error("elemEditorTexto não existe");
+  }
 };
 
 export const desabilitarEdicao = (idDocumentoExcluido: string) => {
-  elemBotaoExcluir.disabled = true;
+  if (elemBotaoExcluir) {
+    elemBotaoExcluir.disabled = true;
+  } else {
+    console.error("elemBotaoExcluir não existe");
+  }
+
+  if (!elemEditorTexto) {
+    console.error("elemEditorTexto não existe");
+    return;
+  }
 
   if (idDocumentoExcluido === idDocumento) {
     elemEditorTexto.disabled = true;

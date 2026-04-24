@@ -1,30 +1,52 @@
 import type { DocNomeEId, DocumentoComId } from "./shared/types";
 import { criarDocumento } from "./socket-frontend-index";
 
-const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement;
-const elemListaVazia = document.getElementById("lista-documentos-vazia") as HTMLDivElement;
-const elemSpinner = document.getElementById("spinner") as HTMLDivElement;
+const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement | null;
+const elemListaVazia = document.getElementById("lista-documentos-vazia") as HTMLDivElement | null;
+const elemSpinner = document.getElementById("spinner") as HTMLDivElement | null;
 const elemTextoListaVazia = document.getElementById(
   "texto-lista-documentos-vazia",
-) as HTMLParagraphElement;
-const elemFormNovoDocumento = document.getElementById("form-adiciona-documento") as HTMLFormElement;
+) as HTMLParagraphElement | null;
+const elemFormNovoDocumento = document.getElementById(
+  "form-adiciona-documento",
+) as HTMLFormElement | null;
 
 setTimeout(() => {
-  elemTextoListaVazia.textContent = "Aguarde...";
+  if (elemTextoListaVazia) {
+    elemTextoListaVazia.textContent = "Aguarde...";
+  } else {
+    console.error("elemTextoListaVazia não existe");
+  }
 }, 0);
 
 const timeoutMsgErro = setTimeout(() => {
-  elemSpinner.hidden = true;
-  elemTextoListaVazia.textContent = "Erro ao carregar documentos. Tente novamente.";
+  if (elemSpinner) {
+    elemSpinner.hidden = true;
+  } else {
+    console.error("elemSpinner não existe");
+  }
+
+  if (elemTextoListaVazia) {
+    elemTextoListaVazia.textContent = "Erro ao carregar documentos. Tente novamente.";
+  } else {
+    console.error("elemTextoListaVazia não existe");
+  }
 }, 7000);
 
 export const listarLinkDocumento = (doc: DocNomeEId) => {
-  elemListaVazia.remove();
+  if (elemListaVazia) {
+    elemListaVazia.remove();
+  }
 
   const nomeArquivo = doc.nome;
   const idArquivo = doc._id;
 
   // <a href="documento.html?nome=JavaScript" class="list-group-item list-group-item-action"> JavaScript </a>
+
+  if (!elemListaDocumentos) {
+    console.error("elemListaDocumentos não existe");
+    return;
+  }
 
   const linkDocumento = document.createElement("a");
   linkDocumento.textContent = nomeArquivo;
@@ -36,7 +58,7 @@ export const listarLinkDocumento = (doc: DocNomeEId) => {
 };
 
 export const listarTodosOsDocumentos = (docs: DocumentoComId[]) => {
-  if (!docs.length) {
+  if (!docs.length && elemListaDocumentos) {
     elemListaDocumentos.textContent = "Não foram encontrados documentos para exibir.";
     clearTimeout(timeoutMsgErro);
     return;
@@ -46,7 +68,9 @@ export const listarTodosOsDocumentos = (docs: DocumentoComId[]) => {
     listarLinkDocumento(doc);
   });
 
-  elemFormNovoDocumento.hidden = false;
+  if (elemFormNovoDocumento) {
+    elemFormNovoDocumento.hidden = false;
+  }
 };
 
 export const removerLinkDocumento = (id: string) => {
@@ -54,11 +78,16 @@ export const removerLinkDocumento = (id: string) => {
   linkDocumento?.remove();
 };
 
-const elemNomeNovoDocumento = document.getElementById("input-documento") as HTMLInputElement;
+const elemNomeNovoDocumento = document.getElementById("input-documento") as HTMLInputElement | null;
 
-elemFormNovoDocumento.addEventListener("submit", (evento) => {
+elemFormNovoDocumento?.addEventListener("submit", (evento) => {
   evento.preventDefault();
-  const nomeNovoDoc = elemNomeNovoDocumento.value;
-  criarDocumento(nomeNovoDoc);
-  elemNomeNovoDocumento.value = "";
+
+  if (elemNomeNovoDocumento) {
+    const nomeNovoDoc = elemNomeNovoDocumento.value;
+    criarDocumento(nomeNovoDoc);
+    elemNomeNovoDocumento.value = "";
+  } else {
+    console.error("elemNomeNovoDocumento não existe");
+  }
 });
