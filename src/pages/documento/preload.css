@@ -1,0 +1,26 @@
+body {
+  width: 100vw;
+}
+
+h1 {
+  text-align: center;
+}
+
+main,
+textarea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+textarea {
+  width: 75vw;
+}
+
+.barra-botoes {
+  width: 75vw;
+  margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
