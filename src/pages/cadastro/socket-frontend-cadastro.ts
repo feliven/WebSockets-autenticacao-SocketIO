@@ -13,5 +13,9 @@ socket.on("cadastro_sucesso", () => {
 });
 
 socket.on("cadastro_erro", () => {
-  console.error("Erro no cadastro");
+  alert("Erro no cadastro.");
+});
+
+socket.on("usuario_ja_existe", () => {
+  alert("Este nome de usuário já existe. Escolha outro.");
 });

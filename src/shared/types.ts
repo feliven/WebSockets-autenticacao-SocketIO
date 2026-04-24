@@ -21,6 +21,7 @@ export type ServerToClientEvents = {
   remover_doc_homepage: (idDocumento: string) => void;
   cadastro_sucesso: () => void;
   cadastro_erro: () => void;
+  usuario_ja_existe: () => void;
 };
 
 export type ClientToServerEvents = {

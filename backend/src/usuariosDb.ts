@@ -20,9 +20,18 @@ export const obterUsuarios = () => {
   }
 };
 
-export const encontrarUsuario = (idUsuario: string) => {
+export const encontrarUsuarioPorId = (idUsuario: string) => {
   try {
     const usuarioProcurado = usuariosColecao.findOne({ _id: new ObjectId(idUsuario) });
+    return usuarioProcurado;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const encontrarUsuarioPorNome = (nomeUsuario: string) => {
+  try {
+    const usuarioProcurado = usuariosColecao.findOne({ usuario: nomeUsuario });
     return usuarioProcurado;
   } catch (error) {
     console.error(error);
