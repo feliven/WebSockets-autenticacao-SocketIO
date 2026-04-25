@@ -7,6 +7,7 @@ import type {
 } from "../types.ts";
 import { encontrarUsuarioPorNome } from "../usuariosDb.ts";
 import { autenticarUsuario } from "../utils/autenticarUsuario.ts";
+import { gerarJwt } from "../utils/gerarJwt.ts";
 
 export const registrarEventosLogin = (
   socket: Socket<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
@@ -29,7 +30,9 @@ export const registrarEventosLogin = (
     const resultado = autenticarUsuario(usuarioEncontrado, senha);
 
     if (resultado === true) {
-      socket.emit("autenticacao_sucesso");
+      const tokenJwt = gerarJwt({ nome: usuarioEncontrado.usuario ?? "ERRO NO TOKEN" });
+
+      socket.emit("autenticacao_sucesso", tokenJwt);
     } else if (resultado === false) {
       socket.emit("autenticacao_senha_incorreta");
       console.error("Senha incorreta");
