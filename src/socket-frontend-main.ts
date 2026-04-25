@@ -1,9 +1,9 @@
-import type { ServerToClientEvents, ClientToServerEvents } from "./shared/types";
 import { listarLinkDocumento, listarTodosOsDocumentos, removerLinkDocumento } from "./main";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 import { enderecoApi } from "./shared/enderecoApi";
+import type { SocketFrontend } from "./shared/types";
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(enderecoApi);
+const socket: SocketFrontend = io(enderecoApi);
 
 socket.emit("obter_documentos", (docs) => {
   console.log({ docs });

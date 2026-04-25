@@ -1,15 +1,7 @@
-import type { Socket } from "socket.io";
-import type {
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData,
-} from "../types.ts";
+import type { SocketBackend } from "../types.ts";
 import { criarUsuario, encontrarUsuarioPorNome } from "../usuariosDb.ts";
 
-export const registrarEventosCadastro = (
-  socket: Socket<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
-) => {
+export const registrarEventosCadastro = (socket: SocketBackend) => {
   socket.on("cadastrar_usuario", async (dados) => {
     if (!dados.usuario) {
       return;

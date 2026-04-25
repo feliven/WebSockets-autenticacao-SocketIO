@@ -1,16 +1,7 @@
 import { criarDocumento, obterDocumentos } from "../documentosDb.ts";
-import type {
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData,
-} from "../types.ts";
-import type { Server, Socket } from "socket.io";
+import type { SocketBackend, IoServer } from "../types.ts";
 
-export const registrarEventosInicio = (
-  socket: Socket<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
-  io: Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
-) => {
+export const registrarEventosInicio = (socket: SocketBackend, io: IoServer) => {
   console.log("um usuário se conectou", socket.id);
 
   socket.on("obter_documentos", async (retornarDocs) => {

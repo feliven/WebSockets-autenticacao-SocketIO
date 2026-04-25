@@ -1,4 +1,21 @@
 import type { WithId } from "mongodb";
+import type { Server, Socket } from "socket.io";
+
+export type SocketBackend = Socket<
+  ClientToServerEvents,
+  ServerToClientEvents,
+  InterServerEvents,
+  SocketData
+>;
+
+export type IoServer = Server<
+  ClientToServerEvents,
+  ServerToClientEvents,
+  InterServerEvents,
+  SocketData
+>;
+
+// types no frontend e backend devem ser iguais a partir deste ponto
 
 export type Documento = {
   nome: string | null;

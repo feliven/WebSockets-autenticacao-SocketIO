@@ -1,14 +1,9 @@
 import { enderecoApi } from "../../shared/enderecoApi";
-import type {
-  ServerToClientEvents,
-  ClientToServerEvents,
-  Documento,
-  DocConteudoEId,
-} from "../../shared/types";
+import type { Documento, DocConteudoEId, SocketFrontend } from "../../shared/types";
 import { atualizarTextoEditor, desabilitarEdicao } from "./documento";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(enderecoApi);
+const socket: SocketFrontend = io(enderecoApi);
 
 export const selecionarDocumento = (
   idDocumento: string,

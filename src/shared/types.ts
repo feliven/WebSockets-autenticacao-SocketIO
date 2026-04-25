@@ -1,3 +1,11 @@
+import type { Socket } from "socket.io-client";
+
+export type SocketFrontend = Socket<ServerToClientEvents, ClientToServerEvents>;
+
+type WithId<T> = T & { _id: string };
+
+// types no frontend e backend devem ser iguais a partir deste ponto
+
 export type Documento = {
   nome: string | null;
   conteudo: string | null;
@@ -13,8 +21,6 @@ export type Usuario = {
   hashSenha: string | null;
   salSenha: string | null;
 };
-
-type WithId<T> = T & { _id: string };
 
 export type DocumentoComId = WithId<Documento>;
 export type DocConteudoEId = WithId<Omit<Documento, "nome">>;

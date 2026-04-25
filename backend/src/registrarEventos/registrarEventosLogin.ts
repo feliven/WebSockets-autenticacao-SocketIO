@@ -1,17 +1,9 @@
-import type { Socket } from "socket.io";
-import type {
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData,
-} from "../types.ts";
+import type { SocketBackend } from "../types.ts";
 import { encontrarUsuarioPorNome } from "../usuariosDb.ts";
 import { autenticarUsuario } from "../utils/autenticarUsuario.ts";
 import { gerarJwt } from "../utils/gerarJwt.ts";
 
-export const registrarEventosLogin = (
-  socket: Socket<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,
-) => {
+export const registrarEventosLogin = (socket: SocketBackend) => {
   socket.on("autenticar_usuario", async ({ usuario, senha }) => {
     if (!usuario || !senha) {
       socket.emit("usuario_senha_nao_informados");

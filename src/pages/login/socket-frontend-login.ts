@@ -1,9 +1,9 @@
-import { io, Socket } from "socket.io-client";
-import type { ServerToClientEvents, ClientToServerEvents, Cadastro } from "../../shared/types";
+import { io } from "socket.io-client";
+import type { Cadastro, SocketFrontend } from "../../shared/types";
 import { enderecoApi } from "../../shared/enderecoApi";
 import { definirCookie } from "../../utils/cookies";
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(enderecoApi);
+const socket: SocketFrontend = io(enderecoApi);
 
 export const emitirAutenticacaoUsuario = (dados: Cadastro) => {
   socket.emit("autenticar_usuario", dados);
