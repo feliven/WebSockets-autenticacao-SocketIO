@@ -1,5 +1,5 @@
 import type { DocNomeEId, DocumentoComId } from "./shared/types";
-import { criarDocumento } from "./socket-frontend-index";
+import { criarDocumento } from "./socket-frontend-main";
 import { obterCookie } from "./utils/cookies";
 
 const tokenJwt = obterCookie("tokenJwt");
@@ -8,8 +8,12 @@ console.log({ tokenJwt });
 const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement | null;
 const elemListaVazia = document.getElementById("lista-documentos-vazia") as HTMLDivElement | null;
 const elemSpinner = document.getElementById("spinner") as HTMLDivElement | null;
-const elemTextoListaVazia = document.getElementById("texto-lista-documentos-vazia") as HTMLParagraphElement | null;
-const elemFormNovoDocumento = document.getElementById("form-adiciona-documento") as HTMLFormElement | null;
+const elemTextoListaVazia = document.getElementById(
+  "texto-lista-documentos-vazia",
+) as HTMLParagraphElement | null;
+const elemFormNovoDocumento = document.getElementById(
+  "form-adiciona-documento",
+) as HTMLFormElement | null;
 
 setTimeout(() => {
   if (elemTextoListaVazia) {

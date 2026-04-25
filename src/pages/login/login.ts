@@ -2,8 +2,6 @@ import { emitirAutenticacaoUsuario } from "./socket-frontend-login";
 
 const elemFormLogin = document.getElementById("form-login") as HTMLFormElement | null;
 
-console.log({ elemFormLogin });
-
 elemFormLogin?.addEventListener("submit", (e) => {
   e.preventDefault();
 
