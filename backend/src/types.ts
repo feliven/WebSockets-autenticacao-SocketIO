@@ -1,5 +1,5 @@
 import type { WithId } from "mongodb";
-import type { Server, Socket } from "socket.io";
+import type { Namespace, Server, Socket } from "socket.io";
 
 export type SocketBackend = Socket<
   ClientToServerEvents,
@@ -14,6 +14,15 @@ export type IoServer = Server<
   InterServerEvents,
   SocketData
 >;
+
+export type IoNamespace = Namespace<
+  ClientToServerEvents,
+  ServerToClientEvents,
+  InterServerEvents,
+  SocketData
+>;
+
+export type IoConnection = IoServer | IoNamespace;
 
 // types no frontend e backend devem ser iguais a partir deste ponto
 

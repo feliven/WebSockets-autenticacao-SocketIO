@@ -1,7 +1,7 @@
 import { atualizarDocumento, encontrarDocumento, excluirDocumento } from "../documentosDb.ts";
-import type { SocketBackend, IoServer } from "../types.ts";
+import type { SocketBackend, IoConnection } from "../types.ts";
 
-export const registrarEventosDocumento = (socket: SocketBackend, io: IoServer) => {
+export const registrarEventosDocumento = (socket: SocketBackend, io: IoConnection) => {
   socket.on("excluir_documento", async (idDocumento) => {
     const resultado = await excluirDocumento(idDocumento);
 
