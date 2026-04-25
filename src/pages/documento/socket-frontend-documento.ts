@@ -1,10 +1,10 @@
+import { enderecoApi } from "../../shared/enderecoApi";
 import type {
   ServerToClientEvents,
   ClientToServerEvents,
   Documento,
   DocConteudoEId,
 } from "../../shared/types";
-import { enderecoApi } from "../../socket-frontend-index";
 import { atualizarTextoEditor, desabilitarEdicao } from "./documento";
 import { io, Socket } from "socket.io-client";
 

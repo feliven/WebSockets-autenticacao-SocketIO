@@ -1,8 +1,7 @@
 import type { ServerToClientEvents, ClientToServerEvents } from "./shared/types";
 import { listarLinkDocumento, listarTodosOsDocumentos, removerLinkDocumento } from "./main";
 import { io, Socket } from "socket.io-client";
-
-export const enderecoApi = "http://localhost:3000";
+import { enderecoApi } from "./shared/enderecoApi";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(enderecoApi);
 

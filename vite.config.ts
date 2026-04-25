@@ -12,6 +12,8 @@ export default defineConfig({
       input: {
         home: resolve(import.meta.dirname, "index.html"),
         documento: resolve(import.meta.dirname, "src/pages/documento/documento.html"),
+        cadastro: resolve(import.meta.dirname, "src/pages/cadastro/cadastro.html"),
+        login: resolve(import.meta.dirname, "src/pages/login/login.html"),
       },
     },
   },
