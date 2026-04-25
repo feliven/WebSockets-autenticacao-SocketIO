@@ -5,7 +5,8 @@ import type {
   InterServerEvents,
   SocketData,
 } from "../types.ts";
-import { autenticarUsuario, encontrarUsuarioPorNome } from "../usuariosDb.ts";
+import { encontrarUsuarioPorNome } from "../usuariosDb.ts";
+import { autenticarUsuario } from "../utils/autenticarUsuario.ts";
 
 export const registrarEventosLogin = (
   socket: Socket<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>,

@@ -1,8 +1,7 @@
 import { ObjectId } from "mongodb";
 import { usuariosColecao } from "./dbConnect.ts";
-import type { Cadastro, Usuario } from "./types.ts";
+import type { Cadastro } from "./types.ts";
 import { criarHashGerarSalt } from "./utils/criaHashSal.ts";
-import { scryptSync, timingSafeEqual } from "crypto";
 
 export const criarUsuario = ({ usuario, senha }: Cadastro) => {
   if (!usuario || !senha) {
@@ -18,20 +17,6 @@ export const criarUsuario = ({ usuario, senha }: Cadastro) => {
   } catch (error) {
     console.error(error);
   }
-};
-
-export const autenticarUsuario = ({ hashSenha, salSenha }: Usuario, senhaInformada: string) => {
-  if (!hashSenha || !salSenha) {
-    console.error("Hash e/ou salt nulo(s)");
-    return;
-  }
-
-  const hashGerada = scryptSync(senhaInformada, salSenha, 64);
-  const hashReal = Buffer.from(hashSenha, "hex");
-
-  const hashesSaoIguais = timingSafeEqual(hashGerada, hashReal);
-
-  return hashesSaoIguais;
 };
 
 export const obterUsuarios = () => {
