@@ -28,6 +28,11 @@ export type ServerToClientEvents = {
   cadastro_sucesso: () => void;
   cadastro_erro: () => void;
   usuario_ja_existe: () => void;
+  autenticacao_sucesso: () => void;
+  autenticacao_senha_incorreta: () => void;
+  autenticacao_erro: () => void;
+  usuario_nao_encontrado: () => void;
+  usuario_senha_nao_informados: () => void;
 };
 
 export type ClientToServerEvents = {
@@ -40,6 +45,7 @@ export type ClientToServerEvents = {
   ) => void;
   texto_editor: (dados: DocConteudoEId) => void;
   cadastrar_usuario: (dados: Cadastro) => void;
+  autenticar_usuario: (dados: Cadastro) => void;
 };
 
 export type InterServerEvents = {
