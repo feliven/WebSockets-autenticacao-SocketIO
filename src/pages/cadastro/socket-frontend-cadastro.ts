@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import type { Cadastro, SocketFrontend } from "../../shared/types";
-import { enderecoApi } from "../../shared/enderecoApi";
+import { enderecoApi } from "../../shared/variables";
 
 const socket: SocketFrontend = io(enderecoApi);
 

@@ -1,6 +1,6 @@
 import { listarLinkDocumento, listarTodosOsDocumentos, removerLinkDocumento } from "./main";
 import { io } from "socket.io-client";
-import { enderecoApi } from "./shared/enderecoApi";
+import { enderecoApi } from "./shared/variables";
 import type { SocketFrontend } from "./shared/types";
 
 const socket: SocketFrontend = io(enderecoApi);

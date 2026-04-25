@@ -1,4 +1,4 @@
-import { enderecoApi } from "../../shared/enderecoApi";
+import { enderecoApi } from "../../shared/variables";
 import type { Documento, DocConteudoEId, SocketFrontend } from "../../shared/types";
 import { atualizarTextoEditor, desabilitarEdicao } from "./documento";
 import { io } from "socket.io-client";

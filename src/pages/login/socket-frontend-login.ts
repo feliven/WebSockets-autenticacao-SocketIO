@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import type { Cadastro, SocketFrontend } from "../../shared/types";
-import { enderecoApi } from "../../shared/enderecoApi";
+import { enderecoApi, nomeCookie } from "../../shared/variables";
 import { definirCookie } from "../../utils/cookies";
 
 const socket: SocketFrontend = io(enderecoApi);
@@ -10,7 +10,7 @@ export const emitirAutenticacaoUsuario = (dados: Cadastro) => {
 };
 
 socket.on("autenticacao_sucesso", (tokenJwt) => {
-  void definirCookie("tokenJwt", tokenJwt);
+  void definirCookie(nomeCookie, tokenJwt);
   window.location.assign("/");
 });
 
