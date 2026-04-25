@@ -1,6 +1,6 @@
 import type { DocNomeEId, DocumentoComId } from "./shared/types";
 import { criarDocumento } from "./socket-frontend-main";
-import { obterCookie } from "./utils/cookies";
+import { obterCookie, removerCookie } from "./utils/cookies";
 
 const tokenJwt = obterCookie("tokenJwt");
 console.log({ tokenJwt });
@@ -93,5 +93,20 @@ elemFormNovoDocumento?.addEventListener("submit", (evento) => {
     elemNomeNovoDocumento.value = "";
   } else {
     console.error("elemNomeNovoDocumento não existe");
+  }
+});
+
+const elemBotaoLogout = document.getElementById("botao-logout") as HTMLButtonElement | null;
+
+elemBotaoLogout?.addEventListener("click", () => {
+  const cookieFoiRemovido = removerCookie("tokenJwt");
+
+  if (cookieFoiRemovido === true) {
+    console.log("Logout feito com sucesso");
+    window.location.assign("src/pages/login/login.html");
+  } else if (cookieFoiRemovido === false) {
+    alert("Erro ao fazer logout.");
+  } else {
+    console.warn("Cookie de sessão não encontrado.");
   }
 });

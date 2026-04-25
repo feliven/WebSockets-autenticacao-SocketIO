@@ -11,8 +11,7 @@ export const emitirAutenticacaoUsuario = (dados: Cadastro) => {
 
 socket.on("autenticacao_sucesso", (tokenJwt) => {
   definirCookie("tokenJwt", tokenJwt);
-
-  console.log("Login feito com sucesso", { tokenJwt });
+  window.location.assign("/");
 });
 
 socket.on("autenticacao_senha_incorreta", () => {

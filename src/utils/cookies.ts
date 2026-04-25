@@ -18,3 +18,15 @@ export const obterCookie = (chave: string) => {
 
   return valorCookie;
 };
+
+export const removerCookie = (chave: string) => {
+  if (!obterCookie(chave)) {
+    return;
+  }
+
+  document.cookie = `${chave}=; expires=01 Jan 1970`;
+
+  const cookieFoiRemovido = !obterCookie(chave);
+
+  return cookieFoiRemovido;
+};
