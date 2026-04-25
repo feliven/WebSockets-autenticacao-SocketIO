@@ -1,6 +1,7 @@
 import { io, Socket } from "socket.io-client";
 import type { ServerToClientEvents, ClientToServerEvents, Cadastro } from "../../shared/types";
 import { enderecoApi } from "../../shared/enderecoApi";
+import { definirCookie } from "../../utils/cookies";
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(enderecoApi);
 
@@ -8,8 +9,10 @@ export const emitirAutenticacaoUsuario = (dados: Cadastro) => {
   socket.emit("autenticar_usuario", dados);
 };
 
-socket.on("autenticacao_sucesso", () => {
-  console.log("Login feito com sucesso");
+socket.on("autenticacao_sucesso", (tokenJwt) => {
+  definirCookie("tokenJwt", tokenJwt);
+
+  console.log("Login feito com sucesso", { tokenJwt });
 });
 
 socket.on("autenticacao_senha_incorreta", () => {
