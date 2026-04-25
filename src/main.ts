@@ -2,7 +2,7 @@ import type { DocNomeEId, DocumentoComId } from "./shared/types";
 import { criarDocumento } from "./socket-frontend-main";
 import { obterCookie, removerCookie } from "./utils/cookies";
 
-const tokenJwt = obterCookie("tokenJwt");
+const tokenJwt = await obterCookie("tokenJwt");
 console.log({ tokenJwt });
 
 const elemListaDocumentos = document.getElementById("lista-documentos") as HTMLDivElement | null;
@@ -98,8 +98,8 @@ elemFormNovoDocumento?.addEventListener("submit", (evento) => {
 
 const elemBotaoLogout = document.getElementById("botao-logout") as HTMLButtonElement | null;
 
-elemBotaoLogout?.addEventListener("click", () => {
-  const cookieFoiRemovido = removerCookie("tokenJwt");
+elemBotaoLogout?.addEventListener("click", async () => {
+  const cookieFoiRemovido = await removerCookie("tokenJwt");
 
   if (cookieFoiRemovido === true) {
     console.log("Logout feito com sucesso");

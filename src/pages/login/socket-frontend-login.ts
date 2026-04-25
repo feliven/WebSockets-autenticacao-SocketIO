@@ -10,7 +10,7 @@ export const emitirAutenticacaoUsuario = (dados: Cadastro) => {
 };
 
 socket.on("autenticacao_sucesso", (tokenJwt) => {
-  definirCookie("tokenJwt", tokenJwt);
+  void definirCookie("tokenJwt", tokenJwt);
   window.location.assign("/");
 });
 

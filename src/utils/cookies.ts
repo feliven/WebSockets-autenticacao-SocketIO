@@ -1,32 +1,40 @@
-export const definirCookie = (chave: string, valor: string) => {
-  document.cookie = `${chave}=${valor};path=/`;
+export const definirCookie = async (chave: string, valor: string) => {
+  try {
+    await cookieStore.set(chave, valor);
+  } catch (error) {
+    console.error(`Erro ao configurar cookie ${chave}:`, { error });
+  }
 };
 
-export const obterCookie = (chave: string) => {
-  const cookieComChave = document.cookie.split("; ").find((cookie) => {
-    return cookie.startsWith(`${chave}=`);
-  });
+export const obterCookie = async (chave: string) => {
+  try {
+    const cookieComChave = await cookieStore.get(chave);
+    console.log({ cookieComChave });
 
-  console.log({ cookieComChave });
+    if (!cookieComChave) {
+      console.error("Cookie não encontrado");
+      return;
+    }
 
-  if (!cookieComChave) {
-    console.error("Cookie não encontrado");
-    return;
+    const valorCookie = cookieComChave.value;
+    return valorCookie;
+  } catch (error) {
+    console.error(`Erro ao obter cookie ${chave}:`, { error });
   }
-
-  const valorCookie = cookieComChave.split("=")[1];
-
-  return valorCookie;
 };
 
-export const removerCookie = (chave: string) => {
-  if (!obterCookie(chave)) {
-    return;
+export const removerCookie = async (chave: string) => {
+  try {
+    const cookieParaRemover = await obterCookie(chave);
+    if (!cookieParaRemover) {
+      return;
+    }
+
+    await cookieStore.delete(chave);
+
+    const cookieFoiRemovido = !(await obterCookie(chave));
+    return cookieFoiRemovido;
+  } catch (error) {
+    console.error(`Erro ao remover cookie ${chave}:`, { error });
   }
-
-  document.cookie = `${chave}=; expires=01 Jan 1970`;
-
-  const cookieFoiRemovido = !obterCookie(chave);
-
-  return cookieFoiRemovido;
 };
