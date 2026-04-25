@@ -1,12 +1,20 @@
 import io from "./Server.ts";
+import autorizarUsuario from "./middleware/autorizarUsuario.ts";
 import { registrarEventosCadastro } from "./registrarEventos/registrarEventosCadastro.ts";
 import { registrarEventosDocumento } from "./registrarEventos/registrarEventosDocumento.ts";
-import { registrarEventosInicio } from "./registrarEventos/registrarEventosInicio.ts";
+import { registrarEventosHome } from "./registrarEventos/registrarEventosHome.ts";
 import { registrarEventosLogin } from "./registrarEventos/registrarEventosLogin.ts";
 
+// Applies the middleware ONLY to this namespace
+io.of("/usuarios").use(autorizarUsuario);
+
+io.of("/usuarios").on("connection", (socket) => {
+  registrarEventosHome(socket, io.of("/usuarios"));
+  registrarEventosDocumento(socket, io.of("/usuarios"));
+});
+
+// Default namespace remains open for public events
 io.on("connection", (socket) => {
-  registrarEventosInicio(socket, io);
-  registrarEventosDocumento(socket, io);
   registrarEventosCadastro(socket);
   registrarEventosLogin(socket);
 

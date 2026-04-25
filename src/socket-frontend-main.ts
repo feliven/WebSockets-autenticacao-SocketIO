@@ -1,9 +1,19 @@
 import { listarLinkDocumento, listarTodosOsDocumentos, removerLinkDocumento } from "./main";
 import { io } from "socket.io-client";
-import { enderecoApi } from "./shared/variables";
+import { enderecoApi, nomeCookie } from "./shared/variables";
 import type { SocketFrontend } from "./shared/types";
+import { obterCookie } from "./utils/cookies";
 
-const socket: SocketFrontend = io(enderecoApi);
+const socket: SocketFrontend = io(`${enderecoApi}/usuarios`, {
+  auth: {
+    token: await obterCookie(nomeCookie),
+  },
+});
+
+socket.on("connect_error", (error: Error) => {
+  console.error(error.message);
+  window.location.assign("src/pages/login/login.html");
+});
 
 socket.emit("obter_documentos", (docs) => {
   console.log({ docs });

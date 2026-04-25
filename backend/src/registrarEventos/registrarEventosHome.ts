@@ -1,7 +1,7 @@
 import { criarDocumento, obterDocumentos } from "../documentosDb.ts";
 import type { SocketBackend, IoConnection } from "../types.ts";
 
-export const registrarEventosInicio = (socket: SocketBackend, io: IoConnection) => {
+export const registrarEventosHome = (socket: SocketBackend, io: IoConnection) => {
   console.log("um usuário se conectou", socket.id);
 
   socket.on("obter_documentos", async (retornarDocs) => {
