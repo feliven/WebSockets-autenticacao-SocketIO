@@ -1,9 +1,19 @@
-import { enderecoApi } from "../../shared/variables";
+import { enderecoApi, nomeCookie } from "../../shared/variables";
 import type { Documento, DocConteudoEId, SocketFrontend } from "../../shared/types";
 import { atualizarTextoEditor, desabilitarEdicao } from "./documento";
 import { io } from "socket.io-client";
+import { obterCookie } from "../../utils/cookies";
 
-const socket: SocketFrontend = io(enderecoApi);
+const socket: SocketFrontend = io(`${enderecoApi}/usuarios`, {
+  auth: {
+    token: await obterCookie(nomeCookie),
+  },
+});
+
+socket.on("connect_error", (error: Error) => {
+  console.error(error.message);
+  window.location.assign("src/pages/login/login.html");
+});
 
 export const selecionarDocumento = (
   idDocumento: string,
