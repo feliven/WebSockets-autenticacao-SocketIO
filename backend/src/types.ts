@@ -2,24 +2,9 @@ import type { WithId } from "mongodb";
 import type { Namespace, Server, Socket } from "socket.io";
 import jwt from "jsonwebtoken";
 
-export type SocketBackend = Socket<
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData
->;
-export type IoServer = Server<
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData
->;
-export type IoNamespace = Namespace<
-  ClientToServerEvents,
-  ServerToClientEvents,
-  InterServerEvents,
-  SocketData
->;
+export type SocketBackend = Socket<ClientToServerEvents, ServerToClientEvents>;
+export type IoServer = Server<ClientToServerEvents, ServerToClientEvents>;
+export type IoNamespace = Namespace<ClientToServerEvents, ServerToClientEvents>;
 
 export type MiddlewareFunction = Parameters<Server["use"]>[0];
 
@@ -80,13 +65,4 @@ export type ClientToServerEvents = {
   texto_editor: (dados: DocConteudoEId) => void;
   cadastrar_usuario: (dados: Cadastro) => void;
   autenticar_usuario: (dados: Cadastro) => void;
-};
-
-export type InterServerEvents = {
-  ping: () => void;
-};
-
-export type SocketData = {
-  name: string;
-  age: number;
 };
