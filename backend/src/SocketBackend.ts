@@ -4,13 +4,16 @@ import { registrarEventosCadastro } from "./registrarEventos/registrarEventosCad
 import { registrarEventosDocumento } from "./registrarEventos/registrarEventosDocumento.ts";
 import { registrarEventosHome } from "./registrarEventos/registrarEventosHome.ts";
 import { registrarEventosLogin } from "./registrarEventos/registrarEventosLogin.ts";
+import type { IoNamespace } from "./types.ts";
+
+const nspUsuarios: IoNamespace = io.of("/usuarios");
 
 // Applies the middleware ONLY to this namespace
-io.of("/usuarios").use(autorizarUsuario);
+nspUsuarios.use(autorizarUsuario);
 
-io.of("/usuarios").on("connection", (socket) => {
-  registrarEventosHome(socket, io.of("/usuarios"));
-  registrarEventosDocumento(socket, io.of("/usuarios"));
+nspUsuarios.on("connection", (socket) => {
+  registrarEventosHome(socket, nspUsuarios);
+  registrarEventosDocumento(socket, nspUsuarios);
 });
 
 // Default namespace remains open for public events
