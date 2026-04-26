@@ -65,6 +65,7 @@ export type ServerToClientEvents = {
   usuario_nao_encontrado: () => void;
   usuario_senha_nao_informados: () => void;
   autorizacao_sucesso: (payload: FullPayload) => void;
+  usuarios_no_documento: (listaUsuarios: string[]) => void;
 };
 
 export type ClientToServerEvents = {

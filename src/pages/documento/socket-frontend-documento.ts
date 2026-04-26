@@ -5,7 +5,12 @@ import type {
   RespostaDocumento,
   DadosEntrada,
 } from "../../shared/types";
-import { atualizarTextoEditor, desabilitarEdicao, tratarAutorizacaoSucesso } from "./documento";
+import {
+  atualizarListaUsuarios,
+  atualizarTextoEditor,
+  desabilitarEdicao,
+  tratarAutorizacaoSucesso,
+} from "./documento";
 import { io } from "socket.io-client";
 import { obterCookie } from "../../utils/cookies";
 
@@ -31,6 +36,10 @@ export const selecionarDocumento = (
     callback(resposta);
   });
 };
+
+socket.on("usuarios_no_documento", (listaUsuarios) => {
+  atualizarListaUsuarios(listaUsuarios);
+});
 
 export const emitirTextoDigitado = (dados: DocConteudoEId) => {
   socket.emit("texto_editor", dados);

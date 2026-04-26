@@ -67,11 +67,6 @@ elemEditorTexto?.addEventListener("keyup", (e) => {
   emitirTextoDigitado(doc);
 });
 
-elemBotaoExcluir?.addEventListener("click", () => {
-  excluirDocumento(idDocumento);
-  window.location.assign("/");
-});
-
 export const atualizarTextoEditor = (texto: string) => {
   if (elemEditorTexto) {
     elemEditorTexto.value = texto;
@@ -79,6 +74,47 @@ export const atualizarTextoEditor = (texto: string) => {
     console.error("elemEditorTexto não existe");
   }
 };
+
+const elemUsuariosConectados = document.getElementById(
+  "usuarios-conectados",
+) as HTMLUListElement | null;
+const wrapperListaUsuariosVazia = document.getElementById(
+  "wrapper-lista-usuarios-vazia",
+) as HTMLDivElement | null;
+const wrapperListaUsuariosPopulada = document.getElementById(
+  "wrapper-lista-usuarios-populada",
+) as HTMLDivElement | null;
+
+export const atualizarListaUsuarios = (listaUsuarios: string[]) => {
+  if (!elemUsuariosConectados || !wrapperListaUsuariosVazia || !wrapperListaUsuariosPopulada) {
+    console.error(
+      "elemUsuariosConectados, wrapperListaUsuariosVazia e/ou wrapperListaUsuariosPopulada não existe(m)",
+    );
+    return;
+  }
+
+  if (listaUsuarios.length === 0) {
+    wrapperListaUsuariosVazia.hidden = false;
+    wrapperListaUsuariosPopulada.hidden = true;
+    return;
+  }
+
+  wrapperListaUsuariosVazia.hidden = true;
+  wrapperListaUsuariosPopulada.hidden = false;
+
+  for (let i = 0; i < listaUsuarios.length; i++) {
+    const usuarioListado = document.createElement("li");
+    usuarioListado.classList.add("list-group-item");
+    usuarioListado.textContent = listaUsuarios[i];
+
+    elemUsuariosConectados.appendChild(usuarioListado);
+  }
+};
+
+elemBotaoExcluir?.addEventListener("click", () => {
+  excluirDocumento(idDocumento);
+  window.location.assign("/");
+});
 
 export const desabilitarEdicao = (idDocumentoExcluido: string) => {
   if (elemBotaoExcluir) {

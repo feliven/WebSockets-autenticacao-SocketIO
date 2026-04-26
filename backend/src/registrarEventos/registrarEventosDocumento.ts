@@ -26,6 +26,8 @@ export const registrarEventosDocumento = (socket: SocketBackend, io: IoNamespace
 
       console.log({ usuariosNoDocumento });
 
+      io.to(dadosEntrada.idDocumento).emit("usuarios_no_documento", usuariosNoDocumento);
+
       retornarDoc({ ...doc, existe: true });
     } else {
       retornarDoc({ existe: false, nome: null, conteudo: null });
