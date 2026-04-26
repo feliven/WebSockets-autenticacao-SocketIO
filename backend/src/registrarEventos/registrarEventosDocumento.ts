@@ -1,5 +1,6 @@
 import { atualizarDocumento, encontrarDocumento, excluirDocumento } from "../documentosDb.ts";
 import type { SocketBackend, IoNamespace } from "../types.ts";
+import { adicionarConexao, obterUsuariosNoDocumento } from "../utils/conexoesDocumentos.ts";
 
 export const registrarEventosDocumento = (socket: SocketBackend, io: IoNamespace) => {
   socket.on("excluir_documento", async (idDocumento) => {
@@ -18,6 +19,13 @@ export const registrarEventosDocumento = (socket: SocketBackend, io: IoNamespace
 
     if (doc) {
       void socket.join(doc._id.toString());
+
+      adicionarConexao(dadosEntrada);
+
+      const usuariosNoDocumento = obterUsuariosNoDocumento(dadosEntrada.idDocumento);
+
+      console.log({ usuariosNoDocumento });
+
       retornarDoc({ ...doc, existe: true });
     } else {
       retornarDoc({ existe: false, nome: null, conteudo: null });
