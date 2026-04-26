@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import type { MiddlewareFunction, SocketBackend } from "../types.ts";
+import type { FullPayload, MiddlewareFunction, SocketBackend } from "../types.ts";
 
 const autorizarUsuario: MiddlewareFunction = (socket: SocketBackend, next) => {
   const tokenJwt = socket.handshake.auth.token as string | undefined;
@@ -12,8 +12,11 @@ const autorizarUsuario: MiddlewareFunction = (socket: SocketBackend, next) => {
   }
 
   try {
-    const tokenVerificado = jwt.verify(tokenJwt, process.env.SEGREDO_JWT ?? "");
-    console.log({ tokenVerificado });
+    const payloadToken = jwt.verify(tokenJwt, process.env.SEGREDO_JWT ?? "") as FullPayload;
+    console.log({ payloadToken });
+
+    socket.emit("autorizacao_sucesso", payloadToken);
+
     next();
   } catch (error) {
     if (error instanceof Error) {

@@ -1,5 +1,6 @@
 import type { WithId } from "mongodb";
 import type { Namespace, Server, Socket } from "socket.io";
+import jwt from "jsonwebtoken";
 
 export type SocketBackend = Socket<
   ClientToServerEvents,
@@ -7,14 +8,12 @@ export type SocketBackend = Socket<
   InterServerEvents,
   SocketData
 >;
-
 export type IoServer = Server<
   ClientToServerEvents,
   ServerToClientEvents,
   InterServerEvents,
   SocketData
 >;
-
 export type IoNamespace = Namespace<
   ClientToServerEvents,
   ServerToClientEvents,
@@ -23,6 +22,10 @@ export type IoNamespace = Namespace<
 >;
 
 export type MiddlewareFunction = Parameters<Server["use"]>[0];
+
+export type MyPayload = { nome: string };
+type JwtPayload = jwt.JwtPayload;
+export type FullPayload = MyPayload & JwtPayload;
 
 // types no frontend e backend devem ser iguais a partir deste ponto
 
@@ -59,6 +62,7 @@ export type ServerToClientEvents = {
   autenticacao_erro: () => void;
   usuario_nao_encontrado: () => void;
   usuario_senha_nao_informados: () => void;
+  autorizacao_sucesso: (payload: FullPayload) => void;
 };
 
 export type ClientToServerEvents = {

@@ -4,6 +4,18 @@ export type SocketFrontend = Socket<ServerToClientEvents, ClientToServerEvents>;
 
 type WithId<T> = T & { _id: string };
 
+export type MyPayload = { nome: string };
+type JwtPayload = {
+  iat?: number | undefined;
+  exp?: number | undefined;
+  iss?: string | undefined;
+  sub?: string | undefined;
+  aud?: string | string[] | undefined;
+  nbf?: number | undefined;
+  jti?: string | undefined;
+};
+export type FullPayload = MyPayload & JwtPayload;
+
 // types no frontend e backend devem ser iguais a partir deste ponto
 
 export type Documento = {
@@ -39,6 +51,7 @@ export type ServerToClientEvents = {
   autenticacao_erro: () => void;
   usuario_nao_encontrado: () => void;
   usuario_senha_nao_informados: () => void;
+  autorizacao_sucesso: (payload: FullPayload) => void;
 };
 
 export type ClientToServerEvents = {

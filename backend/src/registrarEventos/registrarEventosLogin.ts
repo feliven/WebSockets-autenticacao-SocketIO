@@ -1,4 +1,4 @@
-import type { SocketBackend } from "../types.ts";
+import type { MyPayload, SocketBackend } from "../types.ts";
 import { encontrarUsuarioPorNome } from "../usuariosDb.ts";
 import { autenticarUsuario } from "../utils/autenticarUsuario.ts";
 import { gerarJwt } from "../utils/gerarJwt.ts";
@@ -22,7 +22,9 @@ export const registrarEventosLogin = (socket: SocketBackend) => {
     const resultado = autenticarUsuario(usuarioEncontrado, senha);
 
     if (resultado === true) {
-      const tokenJwt = gerarJwt({ nome: usuarioEncontrado.usuario ?? "ERRO NO TOKEN" });
+      const payload: MyPayload = { nome: usuarioEncontrado.usuario ?? "ERRO NO TOKEN" };
+
+      const tokenJwt = gerarJwt(payload);
 
       socket.emit("autenticacao_sucesso", tokenJwt);
     } else if (resultado === false) {

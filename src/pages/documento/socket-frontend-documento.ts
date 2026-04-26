@@ -43,6 +43,10 @@ socket.on("texto_para_clients", (texto) => {
   atualizarTextoEditor(texto);
 });
 
+socket.on("autorizacao_sucesso", (payloadToken) => {
+  console.log({ payloadToken });
+});
+
 socket.on("documento_excluido", (idDocumentoExcluido) => {
   desabilitarEdicao(idDocumentoExcluido);
 });
