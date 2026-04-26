@@ -102,6 +102,8 @@ export const atualizarListaUsuarios = (listaUsuarios: string[]) => {
   wrapperListaUsuariosVazia.hidden = true;
   wrapperListaUsuariosPopulada.hidden = false;
 
+  elemUsuariosConectados.replaceChildren();
+
   for (let i = 0; i < listaUsuarios.length; i++) {
     const usuarioListado = document.createElement("li");
     usuarioListado.classList.add("list-group-item");
