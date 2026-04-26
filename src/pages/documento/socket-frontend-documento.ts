@@ -1,6 +1,11 @@
 import { enderecoApi, nomeCookie } from "../../shared/variables";
-import type { Documento, DocConteudoEId, SocketFrontend } from "../../shared/types";
-import { atualizarTextoEditor, desabilitarEdicao } from "./documento";
+import type {
+  DocConteudoEId,
+  SocketFrontend,
+  RespostaDocumento,
+  DadosEntrada,
+} from "../../shared/types";
+import { atualizarTextoEditor, desabilitarEdicao, tratarAutorizacaoSucesso } from "./documento";
 import { io } from "socket.io-client";
 import { obterCookie } from "../../utils/cookies";
 
@@ -16,14 +21,10 @@ socket.on("connect_error", (error: Error) => {
 });
 
 export const selecionarDocumento = (
-  idDocumento: string,
-  callback: (
-    res: Documento & {
-      existe: boolean;
-    },
-  ) => void,
+  dadosEntrada: DadosEntrada,
+  callback: (res: RespostaDocumento) => void,
 ) => {
-  socket.emit("selecionar_documento", idDocumento, (resposta) => {
+  socket.emit("selecionar_documento", dadosEntrada, (resposta) => {
     if (resposta.existe && resposta.conteudo) {
       atualizarTextoEditor(resposta.conteudo);
     }
@@ -43,8 +44,8 @@ socket.on("texto_para_clients", (texto) => {
   atualizarTextoEditor(texto);
 });
 
-socket.on("autorizacao_sucesso", (payloadToken) => {
-  console.log({ payloadToken });
+socket.on("autorizacao_sucesso", (payload) => {
+  tratarAutorizacaoSucesso(payload);
 });
 
 socket.on("documento_excluido", (idDocumentoExcluido) => {

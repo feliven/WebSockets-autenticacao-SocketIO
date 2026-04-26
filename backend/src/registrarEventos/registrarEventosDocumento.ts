@@ -11,8 +11,10 @@ export const registrarEventosDocumento = (socket: SocketBackend, io: IoNamespace
     }
   });
 
-  socket.on("selecionar_documento", async (idDocumento, retornarDoc) => {
-    const doc = await encontrarDocumento(idDocumento);
+  socket.on("selecionar_documento", async (dadosEntrada, retornarDoc) => {
+    console.log("dadosEntrada.nomeUsuario:", dadosEntrada.nomeUsuario);
+
+    const doc = await encontrarDocumento(dadosEntrada.idDocumento);
 
     if (doc) {
       void socket.join(doc._id.toString());

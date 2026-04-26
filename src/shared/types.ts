@@ -37,6 +37,8 @@ export type Usuario = {
 export type DocumentoComId = WithId<Documento>;
 export type DocConteudoEId = WithId<Omit<Documento, "nome">>;
 export type DocNomeEId = WithId<Omit<Documento, "conteudo">>;
+export type RespostaDocumento = Documento & { existe: boolean };
+export type DadosEntrada = { idDocumento: string; nomeUsuario: string };
 
 export type ServerToClientEvents = {
   texto_para_clients: (texto: string) => void;
@@ -59,8 +61,8 @@ export type ClientToServerEvents = {
   excluir_documento: (idDocumento: string) => void;
   obter_documentos: (callback: (retornarDocs: DocumentoComId[]) => void) => void;
   selecionar_documento: (
-    idDocumento: string,
-    callback: (resposta: Documento & { existe: boolean }) => void,
+    dadosEntrada: DadosEntrada,
+    callback: (resposta: RespostaDocumento) => void,
   ) => void;
   texto_editor: (dados: DocConteudoEId) => void;
   cadastrar_usuario: (dados: Cadastro) => void;

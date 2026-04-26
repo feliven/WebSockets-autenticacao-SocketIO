@@ -1,3 +1,4 @@
+import type { FullPayload, RespostaDocumento } from "../../shared/types";
 import {
   emitirTextoDigitado,
   excluirDocumento,
@@ -29,7 +30,11 @@ const timeoutMsgErro = setTimeout(() => {
   }
 }, 7000);
 
-selecionarDocumento(idDocumento, (resposta) => {
+export const tratarAutorizacaoSucesso = (payload: FullPayload) => {
+  selecionarDocumento({ idDocumento, nomeUsuario: payload.nome }, tratarExibicaoDocumento);
+};
+
+const tratarExibicaoDocumento = (resposta: RespostaDocumento) => {
   if (!elemTituloDocumento || !elemEditorTexto || !elemBotaoExcluir) {
     console.error("elemTituloDocumento, elemEditorTexto e/ou elemBotaoExcluir não existe(m)");
     return;
@@ -52,7 +57,7 @@ selecionarDocumento(idDocumento, (resposta) => {
 
     elemBotaoExcluir.disabled = false;
   }
-});
+};
 
 elemEditorTexto?.addEventListener("keyup", (e) => {
   if (elemEditorTexto.disabled) return;
