@@ -1,4 +1,8 @@
-import { listarLinkDocumento, listarTodosOsDocumentos, removerLinkDocumento } from "./main";
+import {
+  listarLinkDocumento,
+  listarTodosOsDocumentos,
+  removerLinkDocumento,
+} from "./funcoes-interface-main";
 import { io } from "socket.io-client";
 import { enderecoApi, nomeCookie } from "./shared/variables";
 import type { SocketFrontend } from "./shared/types";

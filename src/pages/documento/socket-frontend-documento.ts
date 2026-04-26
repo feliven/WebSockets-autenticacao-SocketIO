@@ -4,13 +4,15 @@ import type {
   SocketFrontend,
   RespostaDocumento,
   DadosEntrada,
+  FullPayload,
 } from "../../shared/types";
 import {
   atualizarListaUsuarios,
   atualizarTextoEditor,
   desabilitarEdicao,
-  tratarAutorizacaoSucesso,
-} from "./documento";
+  idDocumento,
+  tratarExibicaoDocumento,
+} from "./funcoes-interface-documento";
 import { io } from "socket.io-client";
 import { obterCookie } from "../../utils/cookies";
 
@@ -46,6 +48,14 @@ socket.on("usuarios_no_documento", (listaUsuarios) => {
   atualizarListaUsuarios(listaUsuarios);
 });
 
+socket.on("autorizacao_sucesso", (payload) => {
+  tratarAutorizacaoSucesso(payload);
+});
+
+const tratarAutorizacaoSucesso = (payload: FullPayload) => {
+  selecionarDocumento({ idDocumento, nomeUsuario: payload.nome }, tratarExibicaoDocumento);
+};
+
 export const emitirTextoDigitado = (dados: DocConteudoEId) => {
   socket.emit("texto_editor", dados);
 };
@@ -53,10 +63,6 @@ export const emitirTextoDigitado = (dados: DocConteudoEId) => {
 export const excluirDocumento = (idDocumento: string) => {
   socket.emit("excluir_documento", idDocumento);
 };
-
-socket.on("autorizacao_sucesso", (payload) => {
-  tratarAutorizacaoSucesso(payload);
-});
 
 socket.on("texto_para_clients", (texto) => {
   atualizarTextoEditor(texto);
