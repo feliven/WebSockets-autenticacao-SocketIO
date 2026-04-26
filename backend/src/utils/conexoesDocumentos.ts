@@ -8,6 +8,20 @@ export const adicionarConexao = (dados: DadosEntrada) => {
   console.log({ conexoesDocumentos });
 };
 
+export const encontrarConexao = (dadosConexao: DadosEntrada) => {
+  const conexaoEncontrada = conexoesDocumentos.find((dado) => {
+    return (
+      dado.idDocumento === dadosConexao.idDocumento && dado.nomeUsuario === dadosConexao.nomeUsuario
+    );
+  });
+
+  if (!conexaoEncontrada) {
+    console.error("Conexão não encontrada");
+  }
+
+  return conexaoEncontrada;
+};
+
 export const obterUsuariosNoDocumento = (idDocumento: string) => {
   const listaConexoesNoDocumento = conexoesDocumentos.filter((conexao) => {
     return conexao.idDocumento === idDocumento;

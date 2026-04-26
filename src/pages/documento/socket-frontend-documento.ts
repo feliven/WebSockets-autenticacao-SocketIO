@@ -37,6 +37,11 @@ export const selecionarDocumento = (
   });
 };
 
+socket.on("usuario_ja_no_documento", () => {
+  alert("Você já abriu este documento em outra página.");
+  window.location.assign("/");
+});
+
 socket.on("usuarios_no_documento", (listaUsuarios) => {
   atualizarListaUsuarios(listaUsuarios);
 });
@@ -49,12 +54,12 @@ export const excluirDocumento = (idDocumento: string) => {
   socket.emit("excluir_documento", idDocumento);
 };
 
-socket.on("texto_para_clients", (texto) => {
-  atualizarTextoEditor(texto);
-});
-
 socket.on("autorizacao_sucesso", (payload) => {
   tratarAutorizacaoSucesso(payload);
+});
+
+socket.on("texto_para_clients", (texto) => {
+  atualizarTextoEditor(texto);
 });
 
 socket.on("documento_excluido", (idDocumentoExcluido) => {

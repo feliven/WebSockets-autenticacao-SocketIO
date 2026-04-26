@@ -2,6 +2,7 @@ import { atualizarDocumento, encontrarDocumento, excluirDocumento } from "../doc
 import type { SocketBackend, IoNamespace } from "../types.ts";
 import {
   adicionarConexao,
+  encontrarConexao,
   obterUsuariosNoDocumento,
   removerConexao,
 } from "../utils/conexoesDocumentos.ts";
@@ -11,6 +12,13 @@ export const registrarEventosDocumento = (socket: SocketBackend, io: IoNamespace
     console.log("dadosEntrada.nomeUsuario:", dadosEntrada.nomeUsuario);
 
     const doc = await encontrarDocumento(dadosEntrada.idDocumento);
+
+    const conexaoEncontrada = encontrarConexao(dadosEntrada);
+
+    if (conexaoEncontrada) {
+      socket.emit("usuario_ja_no_documento");
+      return;
+    }
 
     if (doc) {
       void socket.join(doc._id.toString());
