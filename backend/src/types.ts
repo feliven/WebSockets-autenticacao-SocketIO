@@ -22,8 +22,6 @@ export type IoNamespace = Namespace<
   SocketData
 >;
 
-export type IoConnection = IoServer | IoNamespace;
-
 export type MiddlewareFunction = Parameters<Server["use"]>[0];
 
 // types no frontend e backend devem ser iguais a partir deste ponto
