@@ -12,7 +12,7 @@ const socket: SocketFrontend = io(`${enderecoApi}/usuarios`, {
 
 socket.on("connect_error", (error: Error) => {
   console.error(error.message);
-  window.location.assign("src/pages/login/login.html");
+  window.location.assign("/src/pages/login/login.html");
 });
 
 export const selecionarDocumento = (

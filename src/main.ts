@@ -104,7 +104,7 @@ elemBotaoLogout?.addEventListener("click", async () => {
 
   if (cookieFoiRemovido === true) {
     console.log("Logout feito com sucesso");
-    window.location.assign("src/pages/login/login.html");
+    window.location.assign("/src/pages/login/login.html");
   } else if (cookieFoiRemovido === false) {
     alert("Erro ao fazer logout.");
   } else {
