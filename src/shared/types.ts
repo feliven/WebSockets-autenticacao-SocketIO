@@ -70,12 +70,3 @@ export type ClientToServerEvents = {
   cadastrar_usuario: (dados: Cadastro) => void;
   autenticar_usuario: (dados: Cadastro) => void;
 };
-
-export type InterServerEvents = {
-  ping: () => void;
-};
-
-export type SocketData = {
-  name: string;
-  age: number;
-};
