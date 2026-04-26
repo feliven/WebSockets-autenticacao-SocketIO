@@ -19,3 +19,19 @@ export const obterUsuariosNoDocumento = (idDocumento: string) => {
 
   return listaUsuariosNoDocumento;
 };
+
+export const removerConexao = (dadosConexao: DadosEntrada) => {
+  const indiceConexao = conexoesDocumentos.findIndex((dado) => {
+    return (
+      dado.idDocumento === dadosConexao.idDocumento && dado.nomeUsuario === dadosConexao.nomeUsuario
+    );
+  });
+
+  if (indiceConexao > -1) {
+    conexoesDocumentos.splice(indiceConexao, 1);
+
+    console.log({ conexoesDocumentos });
+  } else {
+    console.error("conexão não encontrada em conexoesDocumentos");
+  }
+};
